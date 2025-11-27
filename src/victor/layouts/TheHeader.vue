@@ -11,14 +11,24 @@
       </div>
 
       <nav class="hidden md:flex gap-8">
-        <a href="#" class="text-sm font-bold text-gray-700 hover:text-blue-600 uppercase tracking-wider transition">Sản
-          phẩm</a>
-        <a href="#"
-          class="text-sm font-bold text-gray-700 hover:text-blue-600 uppercase tracking-wider transition">Giày</a>
-        <a href="#"
-          class="text-sm font-bold text-gray-700 hover:text-blue-600 uppercase tracking-wider transition">Trang Phục</a>
-        <a href="#" class="text-sm font-bold text-gray-700 hover:text-blue-600 uppercase tracking-wider transition">Phụ
-          Kiện</a>
+        <RouterLink to="/"
+          class="text-sm font-bold text-gray-700 hover:text-blue-600 uppercase tracking-wider transition">
+          Trang Chủ
+        </RouterLink>
+
+        <RouterLink to="/product"
+          class="text-sm font-bold text-gray-700 hover:text-blue-600 uppercase tracking-wider transition">
+          Sản Phẩm
+        </RouterLink>
+
+        <RouterLink to="/product"
+          class="text-sm font-bold text-gray-700 hover:text-blue-600 uppercase tracking-wider transition">
+          Giày
+        </RouterLink>
+
+        <a href="#" class="text-sm font-bold text-gray-700 hover:text-blue-600 uppercase tracking-wider transition">
+          Liên Hệ
+        </a>
       </nav>
 
       <div class="flex items-center gap-5 text-gray-600">
