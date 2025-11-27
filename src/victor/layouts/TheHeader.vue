@@ -11,8 +11,8 @@
       </div>
 
       <nav class="hidden md:flex gap-8">
-        <a href="#" class="text-sm font-bold text-gray-700 hover:text-blue-600 uppercase tracking-wider transition">Vợt
-          Cầu Lông</a>
+        <a href="#" class="text-sm font-bold text-gray-700 hover:text-blue-600 uppercase tracking-wider transition">Sản
+          phẩm</a>
         <a href="#"
           class="text-sm font-bold text-gray-700 hover:text-blue-600 uppercase tracking-wider transition">Giày</a>
         <a href="#"
