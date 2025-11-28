@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-  <div
+  <RouterLink :to="'/products/' + product.id"
     class="group bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full cursor-pointer">
 
     <div class="relative h-64 overflow-hidden bg-gray-50">
@@ -42,7 +42,7 @@ defineProps({
           <span class="text-red-600 font-extrabold text-xl">{{ product.price }}</span>
         </div>
 
-        <button
+        <button @click.prevent
           class="w-10 h-10 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center hover:bg-blue-600 hover:text-white transition shadow-sm"
           title="Thêm vào giỏ">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -54,5 +54,5 @@ defineProps({
       </div>
 
     </div>
-  </div>
+  </RouterLink>
 </template>
