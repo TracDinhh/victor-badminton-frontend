@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/victor/views/HomeView.vue'
-// Sửa dòng 3 thành:
 import ProductList from '@/victor/product/ProductList.vue'
+import ProductDetail from '@/victor/product/ProductDetail.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -14,6 +14,11 @@ const router = createRouter({
       path: '/product',
       name: 'product',
       component: ProductList,
+    },
+    {
+      path: '/products/:id',
+      name: 'product-detail',
+      component: ProductDetail,
     },
   ],
 })
