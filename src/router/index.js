@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '@/victor/views/HomeView.vue'
 import ProductList from '@/victor/product/ProductList.vue'
 import ProductDetail from '@/victor/product/ProductDetail.vue'
+import SignIn from '@/victor/auth/SignIn.vue'
+import SignUp from '@/victor/auth/SignUp.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -19,6 +21,16 @@ const router = createRouter({
       path: '/products/:id',
       name: 'product-detail',
       component: ProductDetail,
+    },
+    {
+      path: '/signin',
+      name: 'signin',
+      component: SignIn,
+    },
+    {
+      path: '/signup',
+      name: 'signup',
+      component: SignUp,
     },
   ],
 })

@@ -3,5 +3,17 @@ import { RouterView } from 'vue-router';
 </script>
 
 <template>
-  <RouterView :key="$route.fullPath" />
+  <RouterView />
 </template>
+
+
+
+<!-- <script setup>
+
+import SignIn from '@/victor/auth/SignIn.vue';
+import SignUp from './victor/auth/SignUp.vue';
+</script>
+
+<template>
+  <SignUp />
+</template> -->

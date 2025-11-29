@@ -7,27 +7,27 @@
     <div class="container mx-auto px-6 h-20 flex justify-between items-center">
 
       <div class="w-32 cursor-pointer">
-        <img src="/images/logo.webp" alt="Victor Logo" class="h-auto w-full" />
+        <img src="/images/logo2.jpg" alt="Victor Logo" class="h-auto w-full" />
       </div>
 
       <nav class="hidden md:flex gap-8">
         <RouterLink to="/"
           class="text-sm font-bold text-gray-700 hover:text-blue-600 uppercase tracking-wider transition">
-          Trang Chủ
+          Home page
         </RouterLink>
 
         <RouterLink to="/product"
           class="text-sm font-bold text-gray-700 hover:text-blue-600 uppercase tracking-wider transition">
-          Sản Phẩm
+          Rackets
         </RouterLink>
 
         <RouterLink to="/product"
           class="text-sm font-bold text-gray-700 hover:text-blue-600 uppercase tracking-wider transition">
-          Giày
+          Shoses
         </RouterLink>
 
         <a href="#" class="text-sm font-bold text-gray-700 hover:text-blue-600 uppercase tracking-wider transition">
-          Liên Hệ
+          Connect
         </a>
       </nav>
 
@@ -50,10 +50,12 @@
             class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
         </button>
 
-        <button
-          class="text-sm font-bold text-gray-800 hover:text-blue-600 transition border-l border-gray-300 pl-5 uppercase">
-          Đăng nhập
-        </button>
+        <RouterLink to="/signin">
+          <button
+            class="text-sm font-bold text-gray-800 hover:text-blue-600 transition border-l border-gray-300 pl-5 uppercase">
+            Sign in
+          </button>
+        </RouterLink>
       </div>
 
     </div>
