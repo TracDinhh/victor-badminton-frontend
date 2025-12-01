@@ -28,7 +28,7 @@ defineProps({
       </div>
     </div>
 
-    <div class="p-4 flex flex-col flex-grow">
+    <div class="p-4 flex flex-col">
 
       <h3
         class="font-bold text-gray-800 text-lg mb-2 leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">

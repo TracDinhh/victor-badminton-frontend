@@ -9,11 +9,9 @@ import { RouterView } from 'vue-router';
 
 
 <!-- <script setup>
-
-import SignIn from '@/victor/auth/SignIn.vue';
-import SignUp from './victor/auth/SignUp.vue';
+import CartView from './victor/views/CartView.vue';
 </script>
 
 <template>
-  <SignUp />
+  <CartView />
 </template> -->
