@@ -1,0 +1,45 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Vợt Cầu Lông Victor Ryuga II Pro",
+      "price": "3.400.000đ",
+      "image": "/images/product-1.webp",
+      "category": "racket",
+      "description": "Siêu phẩm tấn công, được các vận động viên tin dùng."
+    },
+    {
+      "id": 2,
+      "name": "Giày Victor P9200",
+      "price": "1.850.000đ",
+      "image": "/images/product-1.webp",
+      "category": "shoes",
+      "description": "Giày chuyên dụng, đế bám sân cực tốt, giảm chấn thương."
+    },
+    {
+      "id": 3,
+      "name": "Áo Thi Đấu Victor T-2025",
+      "price": "450.000đ",
+      "image": "/images/product-3.webp",
+      "category": "clothes",
+      "description": "Chất vải thun lạnh, thấm hút mồ hôi, thoáng mát."
+    },
+    {
+      "id": 4,
+      "name": "Vợt Victor Thruster K",
+      "price": "2.800.000đ",
+      "image": "/images/product-2.webp",
+      "category": "racket",
+      "description": "Dòng vợt thiên công giá tầm trung."
+    }
+  ],
+  "users": [
+    {
+      "id":1,
+      "email":"trac123@gmail.com",
+      "password":"123456",
+      "name":"Trác Văn Đạt"
+    }
+  ],
+  "orders": []
+}
