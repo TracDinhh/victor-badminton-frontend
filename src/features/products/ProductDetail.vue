@@ -1,8 +1,7 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue';
-import { useRoute } from 'vue-router';
-import DefaultLayout from '@/victor/layouts/DeFaultLayout.vue';
-import api from '@/services/api.js';
+import { ref } from 'vue';
+import { useRoute } from 'vue-router'; // Dùng để lấy ID trên thanh địa chỉ
+import DefaultLayout from '@/layouts/DeFaultLayout.vue';
 
 const route = useRoute();
 

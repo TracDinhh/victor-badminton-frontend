@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import DeFaultLayout from '../layouts/DeFaultLayout.vue';
+import DeFaultLayout from '@/layouts/DeFaultLayout.vue';
 
 const cartItems = ref([
   {
