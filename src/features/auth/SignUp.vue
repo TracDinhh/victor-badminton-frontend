@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import DefaultLayout from '@/victor/layouts/DeFaultLayout.vue';
+import DefaultLayout from '@/layouts/DeFaultLayout.vue';
 
 const fullname = ref('');
 const email = ref('');

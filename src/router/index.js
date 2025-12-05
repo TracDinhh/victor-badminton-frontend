@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/victor/views/HomeView.vue'
-import ProductList from '@/victor/product/ProductList.vue'
-import ProductDetail from '@/victor/product/ProductDetail.vue'
-import SignIn from '@/victor/auth/SignIn.vue'
-import SignUp from '@/victor/auth/SignUp.vue'
-import CartView from '@/victor/views/CartView.vue'
+import HomeView from '@/features/home/HomeView.vue'
+import ProductList from '@/features/products/ProductList.vue'
+import ProductDetail from '@/features/products/ProductDetail.vue'
+import SignIn from '@/features/auth/SignIn.vue'
+import SignUp from '@/features/auth/SignUp.vue'
+import CartView from '@/features/cart/CartView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [

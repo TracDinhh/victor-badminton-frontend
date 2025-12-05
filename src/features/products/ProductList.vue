@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue';
-import DefaultLayout from '@/victor/layouts/DeFaultLayout.vue';
-import FilterSidebar from '@/victor/product/FilterSiedbar.vue';
-import ProductCard from '@/victor/product/ProductCard.vue';
+import DefaultLayout from '@/layouts/DeFaultLayout.vue';
+import FilterSidebar from '@/features/products/components/FilterSidebar.vue';
+import ProductCard from '@/features/products/components/ProductCard.vue';
 
 // Dữ liệu 3 sản phẩm demo
 const products = ref([

@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRoute } from 'vue-router'; // Dùng để lấy ID trên thanh địa chỉ
-import DefaultLayout from '@/victor/layouts/DeFaultLayout.vue';
+import DefaultLayout from '@/layouts/DeFaultLayout.vue';
 
 // 1. Lấy ID từ URL (Ví dụ: /products/1 -> id = 1)
 const route = useRoute();

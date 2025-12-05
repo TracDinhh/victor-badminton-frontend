@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import DefaultLayout from '@/victor/layouts/DeFaultLayout.vue';
+import DefaultLayout from '@/layouts/DeFaultLayout.vue';
 
 const banners = ref([
   { id: 1, image: './images/banner-1.webp' },
