@@ -1,8 +1,8 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router'; // Dùng để lấy ID trên thanh địa chỉ
 import DefaultLayout from '@/layouts/DeFaultLayout.vue';
-
+import api from '@/services/api';
 const route = useRoute();
 
 const product = ref(null);
