@@ -1,7 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import DefaultLayout from '@/layouts/DeFaultLayout.vue';
-
 const fullname = ref('');
 const email = ref('');
 const password = ref('');
@@ -23,7 +21,6 @@ const loginWithGoogle = () => {
 </script>
 
 <template>
-  <DefaultLayout>
     <div class="bg-gray-100 py-12 flex justify-center items-center min-h-[700px]">
       <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-lg border border-gray-100">
 
@@ -105,5 +102,4 @@ const loginWithGoogle = () => {
 
       </div>
     </div>
-  </DefaultLayout>
 </template>

@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
-import DefaultLayout from '@/layouts/DeFaultLayout.vue';
 
 const banners = ref([
   { id: 1, image: './images/banner-1.webp' },
@@ -28,7 +27,6 @@ onUnmounted(() => {
 
 </script>
 <template>
-  <DefaultLayout>
     <div class="relative w-full h-[400px] md:h-[600px] overflow-hidden group bg-gray-100">
 
       <div class="flex transition-transform duration-500 ease-in-out h-full"
@@ -43,5 +41,4 @@ onUnmounted(() => {
     <button @click="prevSlide" class="absolute left-4 top-1/2 bg-black/50 text-white p-2">Prev</button>
     <button @click="nextSlide" class="absolute right-4 top-1/2 bg-black/50 text-white p-2">Next</button>
 
-  </DefaultLayout>
 </template>

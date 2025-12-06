@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import DeFaultLayout from '@/layouts/DeFaultLayout.vue';
 
 const email = ref('');
 const password = ref('')
@@ -15,7 +14,6 @@ const handleWGoogle = () =>{
 }
 </script>
 <template>
-  <DeFaultLayout>
     <div class="bg-gray-100 py-16 flex justify-center items-center min-h-[600px]">
       <div class="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
         <h1 class="text-3xl font-bold text-center text-blue-900 mb-6">Sign in</h1>
@@ -80,5 +78,4 @@ const handleWGoogle = () =>{
         </button>
       </div>
     </div>
-  </DeFaultLayout>
 </template>

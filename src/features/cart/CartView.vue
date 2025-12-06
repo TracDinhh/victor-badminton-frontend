@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import DeFaultLayout from '@/layouts/DeFaultLayout.vue';
 
 const cartItems = ref([
   {
@@ -28,7 +27,6 @@ const cartItems = ref([
 </script>
 
 <template>
-  <DeFaultLayout>
     <div class="bg-gray-50 min-h-screen py-10">
       <div class="container mx-auto px-4">
         <h1 class="text-3xl font-bold text-blue-900 mb-8 flex items-center gap-3">🛒 Your cart
@@ -126,5 +124,4 @@ const cartItems = ref([
         </div>
       </div>
     </div>
-  </DeFaultLayout>
 </template>

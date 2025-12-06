@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import DefaultLayout from '@/layouts/DeFaultLayout.vue';
 import FilterSidebar from '@/features/products/components/FilterSidebar.vue';
 import ProductCard from '@/features/products/components/ProductCard.vue';
 
@@ -16,7 +15,6 @@ const products = ref([
 </script>
 
 <template>
-  <DefaultLayout>
 
     <div class="container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
 
@@ -42,6 +40,4 @@ const products = ref([
       </main>
 
     </div>
-
-  </DefaultLayout>
 </template>
