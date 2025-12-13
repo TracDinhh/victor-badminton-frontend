@@ -1,22 +1,49 @@
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router'; // 1. Import router để chuyển trang
+import api from '@/services/api';
+
+const router = useRouter();
+
 const fullname = ref('');
 const email = ref('');
 const password = ref('');
 const confirmPassword = ref('');
 const phone = ref('');
 
+const errorMessage = ref('');
+const isLoading = ref(false);
 
-const handleRegister = () => {
+const handleRegister = async () => {
+  errorMessage.value = '';
+
   if (password.value !== confirmPassword.value) {
-    alert("Mật khẩu nhập lại không khớp!");
+    errorMessage.value = "Passwords do not match!";
     return;
   }
-  alert(`Đăng ký thành công!\nTên: ${fullname.value}\nEmail: ${email.value}`);
-}
+  isLoading.value = true;
 
-const loginWithGoogle = () => {
-  alert("Tính năng đang phát triển...");
+  try{
+    await api.post('/auth/register',{
+      email: email.value,
+      password: password.value,
+      fullname: fullname.value,
+      phone: phone.value
+    });
+
+    alert("Registration successful! Please sign in.");
+    router.push({ name: 'signin' });
+  }catch(error){
+     if (error.response && error.response.data){
+      const msg = error.response.data.message || error.response.data;
+      errorMessage.value = typeof msg === 'string' ? msg : "Registration failed!";
+    }else {
+      errorMessage.value = "Server connection Error. Please try again later.";
+    }
+  }
+  finally{
+    isLoading.value = false;
+  }
 }
 </script>
 
@@ -28,6 +55,9 @@ const loginWithGoogle = () => {
         <p class="text-center text-gray-500 text-sm mb-8">Join us to start shopping today!</p>
 
         <form @submit.prevent="handleRegister" class="space-y-4">
+          <div v-if="errorMessage" class="p-3 bg-red-100 text-red-700 rounded-lg text-sm text-center">
+          {{ errorMessage }}
+          </div>
 
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-1">Fullname</label>
@@ -69,8 +99,9 @@ const loginWithGoogle = () => {
             >
           </div>
 
-          <button class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition shadow-md active:scale-[0.98] transform duration-150">
-            Sign Up
+          <button type="submit" :disabled="isLoading"
+            class="w-full bg-blue-600 text-white font-bold py-3 rounded-lg hover:bg-blue-700 transition disabled:opacity-70">
+            {{ isLoading ? 'Creating...' : 'Sign Up' }}
           </button>
         </form>
 
