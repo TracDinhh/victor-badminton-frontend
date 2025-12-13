@@ -115,7 +115,6 @@ const toggleUserMenu = () => {
 </template>
 
 <style scoped>
-/* Hiệu ứng dropdown nhẹ nhàng */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -132,7 +131,6 @@ const toggleUserMenu = () => {
   animation: fadeInUp 0.2s ease-out;
 }
 
-/* Hiệu ứng search trượt xuống */
 @keyframes slideDown {
   from {
     opacity: 0;
