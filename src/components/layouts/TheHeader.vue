@@ -1,82 +1,49 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 import { RouterLink, useRouter } from 'vue-router';
+import { authStore } from '@/stores/auth'; // IMPORT STORE
 
 const router = useRouter();
 
-// --- KHAI BÁO BIẾN ---
+// --- STATE ---
 const showSearch = ref(false);
 const showUserMenu = ref(false);
-const currentUser = ref(null);
 
-// Dùng ref để đánh dấu các phần tử HTML (để biết click vào đâu)
+// --- CLICK OUTSIDE ---
 const searchContainer = ref(null);
 const userMenuContainer = ref(null);
 const searchBtn = ref(null);
 const userBtn = ref(null);
 
-// --- HÀM CẬP NHẬT USER TỪ LOCAL STORAGE ---
-const updateCurrentUser = () => {
-  const userStr = localStorage.getItem('user');
-  if (userStr) {
-    currentUser.value = JSON.parse(userStr);
-  } else {
-    currentUser.value = null;
-  }
-};
-
-// --- HÀM XỬ LÝ CLICK RA NGOÀI ---
 const handleClickOutside = (event) => {
-  // 1. Xử lý User Menu
+  // Chỉ tắt menu User nếu đang mở
   if (showUserMenu.value && userMenuContainer.value && userBtn.value) {
-    // Nếu click KHÔNG nằm trong Menu VÀ KHÔNG nằm trong nút User -> Tắt
     if (!userMenuContainer.value.contains(event.target) && !userBtn.value.contains(event.target)) {
       showUserMenu.value = false;
     }
   }
-
-  // 2. Xử lý Search
+  // Chỉ tắt Search nếu đang mở
   if (showSearch.value && searchContainer.value && searchBtn.value) {
-    // Nếu click KHÔNG nằm trong khung Search VÀ KHÔNG nằm trong nút Search -> Tắt
     if (!searchContainer.value.contains(event.target) && !searchBtn.value.contains(event.target)) {
       showSearch.value = false;
     }
   }
 };
 
-// --- LIFECYCLE VUE ---
-onMounted(() => {
-  updateCurrentUser();
-  // Lắng nghe click toàn trang
-  window.addEventListener('click', handleClickOutside);
-  // Lắng nghe sự kiện login thành công
-  window.addEventListener('login-success', updateCurrentUser);
-});
+onMounted(() => { window.addEventListener('click', handleClickOutside); });
+onUnmounted(() => { window.removeEventListener('click', handleClickOutside); });
 
-onUnmounted(() => {
-  // Dọn dẹp khi tắt component
-  window.removeEventListener('click', handleClickOutside);
-  window.removeEventListener('login-success', updateCurrentUser);
-});
+// --- ACTIONS ---
+const toggleSearch = () => { showSearch.value = !showSearch.value; if(showSearch.value) showUserMenu.value = false; };
+const toggleUserMenu = () => { showUserMenu.value = !showUserMenu.value; if(showUserMenu.value) showSearch.value = false; };
 
-// --- CÁC HÀM TOGGLE ---
-const toggleSearch = () => {
-  showSearch.value = !showSearch.value;
-  if (showSearch.value) showUserMenu.value = false;
-};
-
-const toggleUserMenu = () => {
-  showUserMenu.value = !showUserMenu.value;
-  if (showUserMenu.value) showSearch.value = false;
-};
-
-// --- ĐĂNG XUẤT ---
 const handleLogout = () => {
-  localStorage.removeItem('user');
-  currentUser.value = null;
+  authStore.logout(); // Gọi Store để logout
   showUserMenu.value = false;
   router.push('/signin');
 };
+
+const goToAdmin = () => { router.push('/admin'); }
 </script>
 
 <template>
@@ -99,34 +66,50 @@ const handleLogout = () => {
 
         <button ref="searchBtn" @click.stop="toggleSearch" class="hover:text-blue-600 transition p-2 rounded-full hover:bg-gray-50">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+             <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
           </svg>
         </button>
 
         <RouterLink to="/cart" class="hover:text-blue-600 transition relative p-2 rounded-full hover:bg-gray-50 group">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+             <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
           </svg>
           <span class="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow-sm">3</span>
         </RouterLink>
 
-        <div class="relative">
+        <div v-if="authStore.isAdmin" class="flex items-center gap-2 animate-fade-in-up">
+            <span class="text-[10px] font-bold text-red-600 uppercase border border-red-600 px-2 py-1 rounded tracking-wide">Admin</span>
+
+            <button @click="goToAdmin" title="Quản trị hệ thống" class="p-2 hover:bg-gray-100 rounded-full text-gray-700 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+                </svg>
+            </button>
+
+            <button @click="handleLogout" title="Đăng xuất" class="p-2 hover:bg-red-50 text-red-500 rounded-full transition">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+                </svg>
+            </button>
+        </div>
+
+        <div v-else class="relative">
           <button ref="userBtn" @click.stop="toggleUserMenu" class="flex items-center gap-2 hover:text-blue-600 transition p-1 rounded-full border border-transparent hover:bg-gray-50 focus:outline-none">
-             <div v-if="currentUser" class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-sm border border-blue-200">
-               {{ currentUser.fullname ? currentUser.fullname.charAt(0).toUpperCase() : 'U' }}
+             <div v-if="authStore.user" class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-bold text-sm border border-blue-200">
+               {{ authStore.user.fullname ? authStore.user.fullname.charAt(0).toUpperCase() : 'U' }}
             </div>
             <svg v-else xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+               <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
             </svg>
           </button>
 
           <div v-if="showUserMenu" ref="userMenuContainer"
-               class="absolute right-0 mt-3 w-60 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden py-1 animate-fade-in-up origin-top-right">
+               class="absolute right-0 mt-3 w-60 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden py-1 animate-fade-in-up origin-top-right z-50">
 
-            <div v-if="currentUser">
+            <div v-if="authStore.user">
                 <div class="px-5 py-3 border-b border-gray-100 bg-gray-50">
-                    <p class="text-sm font-bold text-gray-800 truncate">{{ currentUser.fullname }}</p>
-                    <p class="text-xs text-gray-500 truncate">{{ currentUser.email }}</p>
+                    <p class="text-sm font-bold text-gray-800 truncate">{{ authStore.user.fullname }}</p>
+                    <p class="text-xs text-gray-500 truncate">{{ authStore.user.email }}</p>
                 </div>
                 <RouterLink to="/profile" class="block px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Hồ sơ cá nhân</RouterLink>
                 <RouterLink to="/orders" class="block px-5 py-3 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600">Đơn mua</RouterLink>
@@ -146,7 +129,7 @@ const handleLogout = () => {
     </div>
 
     <div v-if="showSearch" ref="searchContainer" class="absolute top-full left-0 w-full bg-white shadow-xl border-t border-gray-100 p-6 z-10 animate-slide-down">
-      <div class="container mx-auto max-w-3xl flex gap-3">
+       <div class="container mx-auto max-w-3xl flex gap-3">
         <input type="text" placeholder="Tìm kiếm..." class="w-full border border-gray-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none">
         <button class="bg-blue-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-blue-700">Tìm</button>
       </div>

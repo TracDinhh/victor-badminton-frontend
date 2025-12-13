@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import api from '@/services/api';
+import { authStore } from '@/stores/auth';
 const router = useRouter();
 
 const email = ref('');
@@ -24,16 +25,25 @@ const handleLogin = async () => {
       password: password.value  // Lấy giá trị từ ref password
     });
 
-    // 3. Nếu thành công
-    console.log("Đăng nhập thành công:", response.data);
+  // 1. Cập nhật store (store sẽ lưu vào localStorage)
+   authStore.login(response.data);
 
-    // Lưu user & token (Giả sử BE trả về object có chứa token)
-    localStorage.setItem('user', JSON.stringify(response.data));
-    // Nếu BE trả về token riêng, nhớ lưu token:
-    // localStorage.setItem('token', response.data.token);
+   // 2. (Tùy chọn) Bắn sự kiện cho những listeners khác nếu cần
+   window.dispatchEvent(new Event('login-success'));
 
-    // 4. Chuyển hướng
-    router.push({ name: 'product' });
+
+    // --- 3. LOGIC PHÂN QUYỀN Ở ĐÂY ---
+    // Giả sử backend trả về: role: ["ROLE_ADMIN"] hoặc role: ["ROLE_USER"]
+    const roles = response.data.role;
+
+    if (roles && roles.includes('ROLE_ADMIN')) {
+        // Nếu là Admin -> Cho sang trang Admin
+        // (Nhớ đảm bảo trong router bạn đã định nghĩa path: '/admin' rồi nhé)
+        router.push('/admin/dashboard');
+    } else {
+        // Nếu là User bình thường -> Về trang chủ
+        router.push('/');
+    }
 
   } catch (error) {
     console.error(error);
